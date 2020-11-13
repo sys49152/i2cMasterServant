@@ -123,7 +123,7 @@ void loop() {
   if (waitTimer > 5000) {
     if (LEDstatus == LOW) {
       PinOn(13);
-      if (PinInput(3)) {
+      if (!PinInput(3)) {
         PinOff(6);
         PinOn(5);
       } else {
@@ -136,7 +136,7 @@ void loop() {
       Serial.println(" LED on");
     } else {
       PinOff(13);
-      if (PinInput(3)) {
+      if (!PinInput(3)) {
         PinOff(6);
         PinOn(5);
       } else {
