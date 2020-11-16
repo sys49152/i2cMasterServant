@@ -120,7 +120,7 @@ void loop() {
   static bool LEDstatus = LOW;
   ArduinoOTA.handle();
 
-  if (waitTimer > 1000) {
+  if (waitTimer > 3000) {
     if (LEDstatus == LOW) {
       PinOn(13);
       if (!PinInput(3)) {
@@ -131,7 +131,6 @@ void loop() {
         PinOff(5);
       }
       LEDstatus = HIGH;
-      waitTimer = 0;
       Serial.print(millis());
       Serial.println(" LED on");
     } else {
@@ -144,10 +143,10 @@ void loop() {
         PinOff(5);
       }
       LEDstatus = LOW;
-      waitTimer = 0;
       Serial.print(millis());
       Serial.println(" LED off");
     }
+    waitTimer = 0;
   }
 }
 
