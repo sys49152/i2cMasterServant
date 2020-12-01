@@ -17,39 +17,43 @@ void loop() {
 // function that executes whenever data is received from master
 // this function is registered as an event, see setup()
 void receiveEvent(int howMany) {
-  char c;
-  byte x;
+  char c;          // one byte
+  uint16_t param;  // two bytes 
 
-  while (Wire.available()) { // loop through all but the last
-    c = Wire.read();             // receive byte as a command
-    Serial.print(c);             // print the character
-    x = Wire.read();             // receive byte
-    Serial.println(x);           // print the byte
+  while (Wire.available()<3) { // at least 3 bytes before we continue
+    delay(10);
   }
+  c = Wire.read();             // receive byte as a command
+  Serial.print(c);             // print the character
+  param = Wire.read();             // receive byte
+  param <<= 8;                     // shift left 8 bits -> high byte
+  param |= Wire.read();            // "or in" low byte
+  Serial.println(param);           // print the word
   switch(c) {
     case 'H':
-      pinMode(x, OUTPUT);
-      digitalWrite(x, HIGH);
+      pinMode(param, OUTPUT);
+      digitalWrite(param, HIGH);
       break;
     case 'L':
-      pinMode(x, OUTPUT);
-      digitalWrite(x, LOW);
+      pinMode(param, OUTPUT);
+      digitalWrite(param, LOW);
       break;
     case 'I':
-      pinMode(x, INPUT);
-      inputVal = digitalRead(x);
+      pinMode(param, INPUT);
+      inputVal = digitalRead(param);
       Serial.print(F("I inputVal "));
       Serial.println(inputVal);
       break;
     case 'i':
-      pinMode(x, INPUT_PULLUP);
-      inputVal = digitalRead(x);
+      pinMode(param, INPUT_PULLUP);
+      inputVal = digitalRead(param);
       Serial.print(F("i inputVal "));
       Serial.println(inputVal);
       break;
     default:
       Serial.println(F("unknown command"));
-  }
+      break;
+    }
 }
 
 void writeEvent() {
