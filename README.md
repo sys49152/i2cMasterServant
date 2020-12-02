@@ -10,16 +10,11 @@ const char* password = "YOUR_PASSWORD"; <br>
 There are commands which are sent via I2c, the commands are composed of a letter and a parameter. <br>
 
 So far the letter can be a upper case or a lower case, the parameter will be transfered as a uint16_t. <br>
-
 for example: <br>
-
-I5 -> Read pin 5 <br>
-
-i5 -> Read pin 5, set internal pull up resistor <br>
-
-H5 -> Write to pin 5 High <br>
-
-L5 -> Write to pin 5 Low <br>
+I5 -> Read pin 5
+i5 -> Read pin 5, set internal pull up resistor
+H5 -> Write to pin 5 High
+L5 -> Write to pin 5 Low
 
 
 
