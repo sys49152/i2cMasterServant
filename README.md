@@ -11,9 +11,13 @@ There are commands which are sent via I2c, the commands are composed of a letter
 
 So far the letter can be a upper case or a lower case, the parameter will be transfered as a uint16_t. <br>
 for example: <br>
+
 I5 -> Read pin 5
+
 i5 -> Read pin 5, set internal pull up resistor
+
 H5 -> Write to pin 5 High
+
 L5 -> Write to pin 5 Low
 
 
